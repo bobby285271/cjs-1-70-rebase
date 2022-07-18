@@ -14,8 +14,8 @@
 #include <jsapi.h>  // for JS_NewObjectWithGivenProto
 #include <jspubtd.h>  // for JSProtoKey
 
-#include "gjs/jsapi-util-args.h"
-#include "gjs/macros.h"
+#include "cjs/jsapi-util-args.h"
+#include "cjs/macros.h"
 #include "modules/cairo-private.h"
 
 JSObject* CairoSolidPattern::new_proto(JSContext* cx, JSProtoKey) {

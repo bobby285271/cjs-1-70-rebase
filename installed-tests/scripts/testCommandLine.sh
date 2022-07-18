@@ -4,9 +4,9 @@
 # SPDX-FileCopyrightText: 2016 Philip Chimento <philip.chimento@gmail.com>
 
 if test "$GJS_USE_UNINSTALLED_FILES" = "1"; then
-    gjs="$TOP_BUILDDIR/gjs-console"
+    gjs="$TOP_BUILDDIR/cjs-console"
 else
-    gjs="gjs-console"
+    gjs="cjs-console"
 fi
 
 # Avoid interference in the profiler tests from stray environment variable
@@ -148,14 +148,14 @@ report_xfail "Invalid option should exit with failure"
 $gjs --invalid-option 2>&1 | grep -q invalid-option
 report "Invalid option should print a relevant message"
 
-# Test that System.exit() works in gjs-console
+# Test that System.exit() works in cjs-console
 $gjs -c 'imports.system.exit(0)'
 report "System.exit(0) should exit successfully"
 $gjs -c 'imports.system.exit(42)'
 test $? -eq 42
 report "System.exit(42) should exit with the correct exit code"
 
-# Test the System.programPath works in gjs-console
+# Test the System.programPath works in cjs-console
 $gjs argv.js
 report "System.programPath should end in '/argv.js' when gjs argv.js is run"
 

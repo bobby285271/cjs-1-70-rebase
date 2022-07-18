@@ -10,7 +10,7 @@
 
 #include <js/TypeDecls.h>
 
-#include "gjs/jsapi-util.h"
+#include "cjs/jsapi-util.h"
 
 #if CAIRO_HAS_PDF_SURFACE
 #    include <cairo-pdf.h>
@@ -21,7 +21,7 @@
 #    include <jsapi.h>  // for JS_NewObjectWithGivenProto
 #    include <jspubtd.h>  // for JSProtoKey
 
-#    include "gjs/jsapi-util-args.h"
+#    include "cjs/jsapi-util-args.h"
 #    include "modules/cairo-private.h"
 
 namespace JS {

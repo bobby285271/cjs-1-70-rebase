@@ -19,19 +19,19 @@ gettext, LocaleCategory, ngettext, pgettext, setlocale, textdomain */
  */
 
 const GLib = imports.gi.GLib;
-const GjsPrivate = imports.gi.GjsPrivate;
+const CjsPrivate = imports.gi.CjsPrivate;
 
-var LocaleCategory = GjsPrivate.LocaleCategory;
+var LocaleCategory = CjsPrivate.LocaleCategory;
 
 function setlocale(category, locale) {
-    return GjsPrivate.setlocale(category, locale);
+    return CjsPrivate.setlocale(category, locale);
 }
 
 function textdomain(dom) {
-    return GjsPrivate.textdomain(dom);
+    return CjsPrivate.textdomain(dom);
 }
 function bindtextdomain(dom, location) {
-    return GjsPrivate.bindtextdomain(dom, location);
+    return CjsPrivate.bindtextdomain(dom, location);
 }
 
 function gettext(msgid) {

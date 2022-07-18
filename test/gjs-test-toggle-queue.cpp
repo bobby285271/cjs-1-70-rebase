@@ -23,8 +23,8 @@
 
 #include "gi/object.h"
 #include "gi/toggle.h"
-#include "gjs/context.h"
-#include "gjs/jsapi-util.h"
+#include "cjs/context.h"
+#include "cjs/jsapi-util.h"
 #include "installed-tests/js/libgjstesttools/gjs-test-tools.h"
 #include "test/gjs-test-utils.h"
 

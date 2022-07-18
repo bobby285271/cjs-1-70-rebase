@@ -38,9 +38,9 @@
 #include <js/Warnings.h>
 #include <jsapi.h>  // for JS_IsExceptionPending, Exce...
 
-#include "gjs/atoms.h"
-#include "gjs/context-private.h"
-#include "gjs/jsapi-util.h"
+#include "cjs/atoms.h"
+#include "cjs/context-private.h"
+#include "cjs/jsapi-util.h"
 #include "modules/console.h"
 
 namespace mozilla {
@@ -261,7 +261,7 @@ gjs_console_interact(JSContext *context,
         if (!ok) {
             /* If this was an uncatchable exception, throw another uncatchable
              * exception on up to the surrounding JS::Evaluate() in main(). This
-             * happens when you run gjs-console and type imports.system.exit(0);
+             * happens when you run cjs-console and type imports.system.exit(0);
              * at the prompt. If we don't throw another uncatchable exception
              * here, then it's swallowed and main() won't exit. */
             return false;

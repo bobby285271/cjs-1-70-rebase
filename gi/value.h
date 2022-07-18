@@ -14,7 +14,7 @@
 
 #include <js/TypeDecls.h>
 
-#include "gjs/macros.h"
+#include "cjs/macros.h"
 
 namespace Gjs {
 struct AutoGValue : GValue {

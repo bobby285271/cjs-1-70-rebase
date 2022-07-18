@@ -419,7 +419,7 @@ Note that the header `<config.h>` must be included before any
 SpiderMonkey headers.
 
 GJS headers should use quotes, _except_ in public header files (any
-header file included from `<gjs/gjs.h>`.)
+header file included from `<cjs/gjs.h>`.)
 
 If you need to include headers conditionally, add the conditional
 after the group that it belongs to, separated by a blank line.
@@ -450,9 +450,9 @@ Here is an example of all of the above rules together:
 #include <jsapi.h>           // for JS_New, JSAutoRealm, JS_GetProperty
 #include <mozilla/Unused.h>
 
-#include "gjs/atoms.h"
-#include "gjs/context-private.h"
-#include "gjs/jsapi-util.h"
+#include "cjs/atoms.h"
+#include "cjs/context-private.h"
+#include "cjs/jsapi-util.h"
 ```
 
 #### Keep "Internal" Headers Private ####

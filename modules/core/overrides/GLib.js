@@ -347,23 +347,23 @@ function _init() {
         GLib.log_variant(logDomain, logLevel, new GLib.Variant('a{sv}', fields));
     };
 
-    // GjsPrivate depends on GLib so we cannot import it
+    // CjsPrivate depends on GLib so we cannot import it
     // before GLib is fully resolved.
 
     this.log_set_writer_func_variant = function (...args) {
-        const {log_set_writer_func} = imports.gi.GjsPrivate;
+        const {log_set_writer_func} = imports.gi.CjsPrivate;
 
         log_set_writer_func(...args);
     };
 
     this.log_set_writer_default = function (...args) {
-        const {log_set_writer_default} = imports.gi.GjsPrivate;
+        const {log_set_writer_default} = imports.gi.CjsPrivate;
 
         log_set_writer_default(...args);
     };
 
     this.log_set_writer_func = function (writer_func) {
-        const {log_set_writer_func} = imports.gi.GjsPrivate;
+        const {log_set_writer_func} = imports.gi.CjsPrivate;
 
         if (typeof writer_func !== 'function') {
             log_set_writer_func(writer_func);

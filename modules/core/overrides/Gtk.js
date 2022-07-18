@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2013 Giovanni Campagna
 
 const Legacy = imports._legacy;
-const {Gio, GjsPrivate, GObject} = imports.gi;
+const {Gio, CjsPrivate, GObject} = imports.gi;
 
 let Gtk;
 let BuilderScope;
@@ -21,7 +21,7 @@ function _init() {
 
     if (Gtk.Container && Gtk.Container.prototype.child_set_property) {
         Gtk.Container.prototype.child_set_property = function (child, property, value) {
-            GjsPrivate.gtk_container_child_set_property(this, child, property, value);
+            CjsPrivate.gtk_container_child_set_property(this, child, property, value);
         };
     }
 

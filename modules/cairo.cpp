@@ -11,7 +11,7 @@
 #include <js/TypeDecls.h>
 #include <jsapi.h>  // for JS_NewPlainObject
 
-#include "gjs/jsapi-util.h"
+#include "cjs/jsapi-util.h"
 #include "modules/cairo-private.h"
 
 #ifdef CAIRO_HAS_XLIB_SURFACE

@@ -16,7 +16,7 @@
 #include <type_traits>  // for is_same
 #include <utility>  // IWYU pragma: keep
 
-#include "gjs/context.h"
+#include "cjs/context.h"
 
 #include <js/TypeDecls.h>
 

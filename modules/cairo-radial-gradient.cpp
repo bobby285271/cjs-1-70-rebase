@@ -13,8 +13,8 @@
 #include <jsapi.h>  // for JS_NewObjectWithGivenProto
 #include <jspubtd.h>  // for JSProtoKey
 
-#include "gjs/jsapi-util-args.h"
-#include "gjs/jsapi-util.h"  // IWYU pragma: keep
+#include "cjs/jsapi-util-args.h"
+#include "cjs/jsapi-util.h"  // IWYU pragma: keep
 #include "modules/cairo-private.h"
 
 namespace JS {

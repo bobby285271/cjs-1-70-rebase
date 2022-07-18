@@ -18,7 +18,7 @@
 #include <js/Utility.h>  // for UniqueChars
 #include <jsapi.h>
 
-#include "gjs/jsapi-util.h"
+#include "cjs/jsapi-util.h"
 #include "modules/print.h"
 
 GJS_JSAPI_RETURN_CONVENTION

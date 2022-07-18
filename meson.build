@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2019 Philip Chimento <philip.chimento@gmail.com>
 # SPDX-FileCopyrightText: 2019 Chun-wei Fan <fanchunwei@src.gnome.org>
 
-project('gjs', 'cpp', 'c', version: '1.70.0', license: ['MIT', 'LGPL2+'],
+project('cjs', 'cpp', 'c', version: '5.3.0', license: ['MIT', 'LGPL2+'],
     meson_version: '>= 0.52.0',
     default_options: ['cpp_std=c++17', 'cpp_rtti=false', 'c_std=c99',
         'warning_level=2', 'b_pch=true' ])
@@ -109,6 +109,8 @@ endif
 
 ### Check for required libraries ###############################################
 
+null_dep = dependency('', required : false)
+
 # Note: Notify GNOME release team when adding or updating dependencies
 glib_required_version = '>= 2.66.0'
 glib = dependency('glib-2.0', version: glib_required_version,
@@ -178,6 +180,20 @@ if readline.found() and not cxx.links(readline_code, dependencies: readline)
 readline library. Configure with -Dreadline=disabled to skip the readline
 features.''')
     endif
+endif
+
+if cxx.links('''
+#include <atomic>
+
+int main(void)
+{
+  std::atomic_int64_t value = ATOMIC_VAR_INIT(0);
+  return value.load();
+}
+''', name: '64-bit atomics built-in')
+    libatomic = null_dep
+else
+    libatomic = cc.find_library('atomic', required: false)
 endif
 
 build_profiler = sysprof_capture.found() and not get_option('profiler').disabled()
@@ -338,7 +354,7 @@ endif
 tapset_subst = configuration_data({
     'EXPANDED_LIBDIR': get_option('libdir'),
 })
-tapset = configure_file(input: 'gjs/gjs.stp.in', output: 'gjs.stp',
+tapset = configure_file(input: 'cjs/cjs.stp.in', output: 'cjs.stp',
     configuration: tapset_subst)
 if get_option('systemtap')
     install_data(tapset,
@@ -353,13 +369,13 @@ directory_defines = [
 ]
 
 gjs_public_headers = [
-    'gjs/context.h',
-    'gjs/coverage.h',
-    'gjs/error-types.h',
-    'gjs/gjs.h',
-    'gjs/macros.h',
-    'gjs/mem.h',
-    'gjs/profiler.h',
+    'cjs/context.h',
+    'cjs/coverage.h',
+    'cjs/error-types.h',
+    'cjs/gjs.h',
+    'cjs/macros.h',
+    'cjs/mem.h',
+    'cjs/profiler.h',
 ]
 
 # For historical reasons, some files live in gi/
@@ -390,44 +406,44 @@ libgjs_sources = [
     'gi/utils-inl.h',
     'gi/value.cpp', 'gi/value.h',
     'gi/wrapperutils.cpp', 'gi/wrapperutils.h',
-    'gjs/atoms.cpp', 'gjs/atoms.h',
-    'gjs/byteArray.cpp', 'gjs/byteArray.h',
-    'gjs/context.cpp', 'gjs/context-private.h',
-    'gjs/coverage.cpp',
-    'gjs/debugger.cpp',
-    'gjs/deprecation.cpp', 'gjs/deprecation.h',
-    'gjs/engine.cpp', 'gjs/engine.h',
-    'gjs/error-types.cpp',
-    'gjs/global.cpp', 'gjs/global.h',
-    'gjs/importer.cpp', 'gjs/importer.h',
-    'gjs/internal.cpp', 'gjs/internal.h',
-    'gjs/mem.cpp', 'gjs/mem-private.h',
-    'gjs/module.cpp', 'gjs/module.h',
-    'gjs/native.cpp', 'gjs/native.h',
-    'gjs/objectbox.cpp', 'gjs/objectbox.h',
-    'gjs/profiler.cpp', 'gjs/profiler-private.h',
-    'gjs/text-encoding.cpp', 'gjs/text-encoding.h',
-    'gjs/stack.cpp',
+    'cjs/atoms.cpp', 'cjs/atoms.h',
+    'cjs/byteArray.cpp', 'cjs/byteArray.h',
+    'cjs/context.cpp', 'cjs/context-private.h',
+    'cjs/coverage.cpp',
+    'cjs/debugger.cpp',
+    'cjs/deprecation.cpp', 'cjs/deprecation.h',
+    'cjs/engine.cpp', 'cjs/engine.h',
+    'cjs/error-types.cpp',
+    'cjs/global.cpp', 'cjs/global.h',
+    'cjs/importer.cpp', 'cjs/importer.h',
+    'cjs/internal.cpp', 'cjs/internal.h',
+    'cjs/mem.cpp', 'cjs/mem-private.h',
+    'cjs/module.cpp', 'cjs/module.h',
+    'cjs/native.cpp', 'cjs/native.h',
+    'cjs/objectbox.cpp', 'cjs/objectbox.h',
+    'cjs/profiler.cpp', 'cjs/profiler-private.h',
+    'cjs/text-encoding.cpp', 'cjs/text-encoding.h',
+    'cjs/stack.cpp',
     'modules/console.cpp', 'modules/console.h',
     'modules/modules.cpp', 'modules/modules.h',
     'modules/print.cpp', 'modules/print.h',
     'modules/system.cpp', 'modules/system.h',
 ]
 
-# GjsPrivate introspection sources
+# CjsPrivate introspection sources
 libgjs_private_sources = [
     'libgjs-private/gjs-gdbus-wrapper.c', 'libgjs-private/gjs-gdbus-wrapper.h',
     'libgjs-private/gjs-util.c', 'libgjs-private/gjs-util.h',
 ]
 
 libgjs_jsapi_sources = [
-    'gjs/jsapi-class.h',
-    'gjs/jsapi-dynamic-class.cpp',
-    'gjs/jsapi-util-args.h',
-    'gjs/jsapi-util-error.cpp',
-    'gjs/jsapi-util-root.h',
-    'gjs/jsapi-util-string.cpp',
-    'gjs/jsapi-util.cpp', 'gjs/jsapi-util.h',
+    'cjs/jsapi-class.h',
+    'cjs/jsapi-dynamic-class.cpp',
+    'cjs/jsapi-util-args.h',
+    'cjs/jsapi-util-error.cpp',
+    'cjs/jsapi-util-root.h',
+    'cjs/jsapi-util-string.cpp',
+    'cjs/jsapi-util.cpp', 'cjs/jsapi-util.h',
     'util/console.cpp', 'util/console.h',
     'util/log.cpp', 'util/log.h',
     'util/misc.cpp', 'util/misc.h',
@@ -458,7 +474,7 @@ module_resource_srcs = gnome.compile_resources('js-resources',
     c_name: 'js_resources')
 
 libgjs_dependencies = [glib, gobject, gthread, gio, gi, ffi, spidermonkey,
-    readline]
+    readline, libatomic]
 pkg_dependencies = [glib, gobject, gthread, gio, gi, ffi, spidermonkey]
 libraries_private = []
 
@@ -495,7 +511,7 @@ if host_machine.system() == 'windows'
     libgjs_cpp_args += ['-DWIN32', '-DXP_WIN', '-DWIN32_LEAN_AND_MEAN']
 endif
 
-pch_headers = ['gjs/gjs_pch.hh']
+pch_headers = ['cjs/gjs_pch.hh']
 if get_option('b_pch') and not meson.version().version_compare('>= 0.59.0')
     if cxx.get_id() == 'gcc'
         warning('Precompiled headers not supported with g++ and meson versions earlier than 0.59.0')
@@ -551,26 +567,26 @@ libgjs = shared_library(meson.project_name(),
     gnu_symbol_visibility: 'hidden',
     install: true)
 
-install_headers(gjs_public_headers, subdir: api_name / 'gjs')
+install_headers(gjs_public_headers, subdir: api_name / 'cjs')
 
 # Allow using libgjs as a subproject
 libgjs_dep = declare_dependency(link_with: [libgjs, libgjs_jsapi],
     dependencies: base_build_dep, include_directories: top_include)
 
-### Build GjsPrivate introspection library #####################################
+### Build CjsPrivate introspection library #####################################
 
 gjs_private_gir = gnome.generate_gir(libgjs,
     includes: ['GObject-2.0', 'Gio-2.0'], sources: libgjs_private_sources,
-    namespace: 'GjsPrivate', nsversion: '1.0', identifier_prefix: 'Gjs',
+    namespace: 'CjsPrivate', nsversion: '1.0', identifier_prefix: 'Gjs',
     symbol_prefix: 'gjs_', extra_args: '--warn-error', install: true,
     install_dir_gir: false, install_dir_typelib: pkglibdir / 'girepository-1.0')
 gjs_private_typelib = gjs_private_gir[1]
 
-### Build gjs-console interpreter ##############################################
+### Build cjs-console interpreter ##############################################
 
-gjs_console_srcs = ['gjs/console.cpp']
+gjs_console_srcs = ['cjs/console.cpp']
 
-gjs_console = executable('gjs-console', gjs_console_srcs,
+gjs_console = executable('cjs-console', gjs_console_srcs,
     dependencies: libgjs_dep, install: true)
 
 meson.add_install_script('build/symlink-gjs.py', get_option('bindir'))
@@ -584,7 +600,7 @@ install_data('installed-tests/extra/lsan.supp',
 
 if get_option('installed_tests')
     schemadir = abs_datadir / 'glib-2.0' / 'schemas'
-    install_data('installed-tests/js/org.gnome.GjsTest.gschema.xml', install_dir: schemadir)
+    install_data('installed-tests/js/org.cinnamon.CjsTest.gschema.xml', install_dir: schemadir)
     meson.add_install_script('build/compile-gschemas.py', schemadir)
 endif
 
@@ -599,7 +615,7 @@ pkg.generate(libgjs, name: api_name, description: 'JS bindings for GObjects',
         'bindir=${exec_prefix}' / get_option('bindir'),
         'datarootdir=${prefix}' / get_option('datadir'),
         'datadir=${datarootdir}',
-        'gjs_console=${bindir}/gjs-console',
+        'gjs_console=${bindir}/cjs-console',
     ])
 
 ### Test environment ###########################################################
@@ -674,7 +690,7 @@ glib_prefix = glib.get_variable(pkgconfig: 'prefix', default_value: '/usr')
 glib_suppresssions = (glib_prefix / 'share' / 'glib-2.0' / 'valgrind' /
     'glib.supp')
 gjs_suppressions = (meson.current_source_dir() / 'installed-tests' / 'extra' /
-    'gjs.supp')
+    'cjs.supp')
 valgrind_args = [
     '--suppressions=@0@'.format(glib_suppresssions),
     '--suppressions=@0@'.format(gjs_suppressions),

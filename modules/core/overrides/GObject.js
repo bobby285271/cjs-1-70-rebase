@@ -4,7 +4,7 @@
 // SPDX-FileCopyrightText: 2017 Philip Chimento <philip.chimento@gmail.com>, <philip@endlessm.com>
 
 const Gi = imports._gi;
-const {GjsPrivate, GLib} = imports.gi;
+const {CjsPrivate, GLib} = imports.gi;
 const {_checkAccessors} = imports._common;
 const Legacy = imports._legacy;
 
@@ -398,21 +398,21 @@ function _init() {
             configurable: false,
             enumerable: false,
             get() {
-                return GjsPrivate.param_spec_get_flags(this);
+                return CjsPrivate.param_spec_get_flags(this);
             },
         },
         'value_type': {
             configurable: false,
             enumerable: false,
             get() {
-                return GjsPrivate.param_spec_get_value_type(this);
+                return CjsPrivate.param_spec_get_value_type(this);
             },
         },
         'owner_type': {
             configurable: false,
             enumerable: false,
             get() {
-                return GjsPrivate.param_spec_get_owner_type(this);
+                return CjsPrivate.param_spec_get_owner_type(this);
             },
         },
     });
@@ -557,7 +557,7 @@ function _init() {
     };
 
     GObject.Object.prototype.bind_property_full = function (...args) {
-        return GjsPrivate.g_object_bind_property_full(this, ...args);
+        return CjsPrivate.g_object_bind_property_full(this, ...args);
     };
 
     // fake enum for signal accumulators, keep in sync with gi/object.c

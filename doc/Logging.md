@@ -27,7 +27,7 @@ log(new Object());
 a JavaScript `Error()` object, with an optional prefix.
 
 It is commonly used in conjunction with `try...catch` blocks to log errors while
-still trapping the exception. An example in `gjs-console` with a backtrace:
+still trapping the exception. An example in `cjs-console` with a backtrace:
 
 ```js
 $ gjs

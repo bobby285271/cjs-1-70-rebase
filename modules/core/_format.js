@@ -5,7 +5,7 @@
 
 /* exported vprintf */
 
-const GjsPrivate = imports.gi.GjsPrivate;
+const CjsPrivate = imports.gi.CjsPrivate;
 
 function vprintf(string, args) {
     let i = 0;
@@ -48,7 +48,7 @@ function vprintf(string, args) {
         case 'd': {
             let intV = parseInt(getArg());
             if (hasAlternativeIntFlag)
-                s = GjsPrivate.format_int_alternative_output(intV);
+                s = CjsPrivate.format_int_alternative_output(intV);
             else
                 s = intV.toString();
             break;

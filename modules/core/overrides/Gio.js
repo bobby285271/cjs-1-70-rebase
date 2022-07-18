@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2011 Giovanni Campagna
 
 var GLib = imports.gi.GLib;
-var GjsPrivate = imports.gi.GjsPrivate;
+var CjsPrivate = imports.gi.CjsPrivate;
 var Signals = imports.signals;
 var Gio;
 
@@ -382,7 +382,7 @@ function _wrapJSObject(interfaceInfo, jsObj) {
         info = Gio.DBusInterfaceInfo.new_for_xml(interfaceInfo);
     info.cache_build();
 
-    var impl = new GjsPrivate.DBusImplementation({g_interface_info: info});
+    var impl = new CjsPrivate.DBusImplementation({g_interface_info: info});
     impl.connect('handle-method-call', function (self, methodName, parameters, invocation) {
         return _handleMethodCall.call(jsObj, info, self, methodName, parameters, invocation);
     });
@@ -491,16 +491,16 @@ function _init() {
     _wrapFunction(Gio.DBusNodeInfo, 'new_for_xml', _newNodeInfo);
     Gio.DBusInterfaceInfo.new_for_xml = _newInterfaceInfo;
 
-    Gio.DBusExportedObject = GjsPrivate.DBusImplementation;
+    Gio.DBusExportedObject = CjsPrivate.DBusImplementation;
     Gio.DBusExportedObject.wrapJSObject = _wrapJSObject;
 
     // ListStore
     Gio.ListStore.prototype[Symbol.iterator] = _listModelIterator;
     Gio.ListStore.prototype.insert_sorted = function (item, compareFunc) {
-        return GjsPrivate.list_store_insert_sorted(this, item, compareFunc);
+        return CjsPrivate.list_store_insert_sorted(this, item, compareFunc);
     };
     Gio.ListStore.prototype.sort = function (compareFunc) {
-        return GjsPrivate.list_store_sort(this, compareFunc);
+        return CjsPrivate.list_store_sort(this, compareFunc);
     };
 
     // Promisify

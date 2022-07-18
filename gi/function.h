@@ -21,8 +21,8 @@
 #include <js/Value.h>  // IWYU pragma: keep
 
 #include "gi/closure.h"
-#include "gjs/jsapi-util.h"
-#include "gjs/macros.h"
+#include "cjs/jsapi-util.h"
+#include "cjs/macros.h"
 
 namespace JS {
 class CallArgs;

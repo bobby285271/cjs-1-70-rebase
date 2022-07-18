@@ -7,7 +7,7 @@
 #include <mutex>
 #include <unordered_set>
 
-#include "gjs/jsapi-util.h"
+#include "cjs/jsapi-util.h"
 
 #ifdef G_OS_UNIX
 #    include <errno.h>

@@ -27,11 +27,11 @@
 #include <jsfriendapi.h>  // for DumpHeap, IgnoreNurseryObjects
 
 #include "gi/object.h"
-#include "gjs/atoms.h"
-#include "gjs/context-private.h"
-#include "gjs/jsapi-util-args.h"
-#include "gjs/jsapi-util.h"
-#include "gjs/profiler-private.h"
+#include "cjs/atoms.h"
+#include "cjs/context-private.h"
+#include "cjs/jsapi-util-args.h"
+#include "cjs/jsapi-util.h"
+#include "cjs/profiler-private.h"
 #include "modules/system.h"
 #include "util/log.h"
 #include "util/misc.h"  // for LogFile

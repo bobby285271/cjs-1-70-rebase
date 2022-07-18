@@ -1655,7 +1655,7 @@ Version 1.53.2
     Philip Chimento]
   * Reduce memory overhead of g_object_weak_ref() [#144, !122, Carlos Garnacho,
     Philip Chimento]
-  * gjs: JS_GetContextPrivate(): gjs-console killed by SIGSEGV [#148, !121,
+  * gjs: JS_GetContextPrivate(): cjs-console killed by SIGSEGV [#148, !121,
     Philip Chimento]
   * Use compacting GC on RSS size growth [#151, !133, Carlos Garnacho]
   * Segfault on enumeration of GjSFileImporter properties when a searchpath
@@ -2248,7 +2248,7 @@ Version 1.49.2
 - Closed bugs:
 
   * Make gjs build on Windows/Visual Studio [#775868, Chun-wei Fan]
-  * Bring back fancy error reporter in gjs-console [#781882, Philip Chimento]
+  * Bring back fancy error reporter in cjs-console [#781882, Philip Chimento]
   * Add Meson running from source support to package.js [#781882, Patrick
     Griffis]
   * package: Fix initSubmodule() when running from source in Meson [#782065,
@@ -2605,7 +2605,7 @@ Version 1.47.0
       'A_FIELD': 'A value',
   });
 
-- Backwards-incompatible change: we have changed the way gjs-console interprets
+- Backwards-incompatible change: we have changed the way cjs-console interprets
   command-line arguments. Previously there was a heuristic to try to decide
   whether "--help" given on the command line was meant for GJS itself or for a
   script being launched. This did not work in some cases, for example:
@@ -2787,7 +2787,7 @@ Changes:
     - Support for non-default constructor (i.e. constructors like
       GdkPixbuf.Pixbuf.new_from_file(file))
     - Add a Lang.bind function which binds the meaning of 'this'
-    - Add an interactive console gjs-console
+    - Add an interactive console cjs-console
     - Allow code in directory modules (i.e. the code should reside in
       __init__.js files)
     - Fix handling of enum/flags return values
@@ -2800,7 +2800,7 @@ Changes:
       - GHashTable return values/out parameters
       - Support GHashTable 'in' parameters
       - Convert JSON-style object to a GHashTable
-    - Add support for UNIX shebang (i.e. #!/usr/bin/gjs-console)
+    - Add support for UNIX shebang (i.e. #!/usr/bin/cjs-console)
     - Support new introspection short/ushort type tags
     - Support GI_TYPE_TAG_FILENAME
     - Improve support for machine-dependent integer types and arrays of
